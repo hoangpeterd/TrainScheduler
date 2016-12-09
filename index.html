@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Train Scheduler</title>
+	<!-- linking CSS reset file -->
+	<link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+	<!-- linking CSS file -->
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+	<!-- linking bootstrap -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+<body>
+	<!-- main content -->
+	<div class="container">
+		<!-- jumbotron -->
+		<div class="jumbotron" align="center">
+			<h1>Train Scheduler</h1>
+			<p>Just add a train, and check the current train schedule.</p>
+		</div>
+		<!-- end jumbotron -->
+		<div class="row">
+    <!-- add train -->
+    <div class="col-sm-4">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+              <h3 class="panel-title"><strong>Add Train</strong></h3>
+            </div>
+            
+            <div class="panel-body">
+                <!-- entry form -->
+              <form>
+                  <div class="form-group">
+                    <label for="train-name-input">Train Name</label>
+                        <input class="form-control" id="train-name-input" type="text" placeholder="Hogwarts Express">
+                  </div>
+                  <div class="form-group">
+                      <label for="role-input">Destination</label>
+                        <input class="form-control" id="role-input" type="text" placeholder="Hogsmeade Station">
+                  </div>
+                  <div class="form-group">
+                      <label for="start-input">First Train Time (HH:mm - military time)</label>
+                        <input class="form-control" id="start-input" type="text" placeholder="11:00 AM">
+                  </div>
+                  <div class="form-group">
+                      <label for="rate-input">Frequency (min)</label>
+                        <input class="form-control" id="rate-input" type="text" placeholder="26">
+                  </div>
+                  <button class="btn btn-primary" id="add-train-btn" type="submit">Submit</button>
+                </form>
+                <!-- end entry form -->
+            </div>
+        </div>
+    <!-- end add train -->
+    </div>
+    <!-- train schedule -->
+    <div class="col-sm-8">
+    <div class="panel panel-primary">
+          <div class="panel-heading">
+              <h3 class="panel-title"><strong>Current Train Schedule</strong></h3>
+            </div>
+              <div class="panel-body">
+                  <table class="table table-hover" id='train-table'>
+                    <thead>
+                        <tr>
+                        <th>Train Name</th>
+                        <th>Destination</th>
+                        <th>Frequency (min)</th>
+                        <th>Next Arrival</th>
+                        <th>Minutes Away</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+              </div>
+        </div>
+    <!-- end train schedule -->
+    </div>
+	<!-- end main content -->
+	</div>
+	</div>
+  <!-- modal -->
+  <div class="container">
+      <!-- alert modal -->
+      <div class="modal fade" id="alertModal" role="dialog">
+        <div class="modal-dialog modal-sm" align="center">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h4 class="modal-title">Error!</h4>
+              </div>
+              <div class="modal-body">
+                  <p>No input detected.</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" id="alertModal" data-dismiss="modal">close</button>
+              </div>
+            </div>
+        </div>
+      </div>
+  </div>
+  <!-- end alert modal -->
+	<!-- footer -->
+	<footer class="footer text-center">
+		<div class="container">
+			<p class="text-muted">&copy; Copyright 2016 Peter Hoang</p>
+		</div>
+	</footer>
+	<!-- end footer -->
+  <!-- linking jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <!-- linking bootstrap JS -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <!-- linking JS file -->
+  <script type="text/javascript" src="assets/javascript/javascript.js"></script>
+  <!-- firebase reference -->
+  <script src="https://www.gstatic.com/firebasejs/3.6.3/firebase.js"></script>
+</body>
+</html>
