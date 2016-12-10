@@ -53,6 +53,10 @@ $("#add-train-btn").on("click", function() {
 });
 // end button for adding trains
 
+// moment JS implementation for next arrival and minutes away
+
+// end moment JS implementation for next arrival and minutes away
+
 // creates a firebase event for adding a train to the database and a row in the html when a user adds an entry
 database.ref().on("child_added", function(childSnapshot, prevChildKey) {
 
