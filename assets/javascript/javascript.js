@@ -39,8 +39,8 @@ $("#add-train-btn").on("click", function() {
 	console.log(newTrain.first);
 	console.log(newTrain.frequency);
 
-	// alert
-	alert("Employee successfully added");
+	// alert modal
+	$('#alertModal').modal();
 
 	// clears all of the text-boxes
 	$("#train-name-input").val("");
