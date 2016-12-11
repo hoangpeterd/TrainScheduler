@@ -22,12 +22,39 @@ $("#add-train-btn").on("click", function() {
 	var trnFirst = $("#first-input").val().trim();
 	var trnFrequency = $("#frequency-input").val().trim();
 
+	// moment JS implementation for next arrival and minutes away
+	var tFrequency = trnFrequency;
+	var firstTime = trnFirst;
+
+	var firstTimeConverted = moment(firstTime, "hh:mm").subtract(1, "years");
+	console.log(firstTimeConverted);
+
+	var currentTime = moment();
+	console.log("CURRENT TIME: " + moment(currentTime).format("hh:mm"));
+
+	var diffTime = moment().diff(moment(firstTimeConverted), "minutes");
+	console.log("DIFFERENCE IN TIME: " + diffTime);
+
+	var tRemainder = diffTime % tFrequency;
+	console.log(tRemainder);
+
+	var tMinutesTillTrain = tFrequency - tRemainder;
+	console.log("MINUTES TILL TRAIN: " + tMinutesTillTrain);
+
+	var nextTrain = moment().add(tMinutesTillTrain, "minutes");
+	console.log("ARRIVAL TIME: " + moment(nextTrain).format("hh:mm"));
+
+	moment().diff(moment.unix(tFirstTrain), "minutes");
+	// end moment JS implementation for next arrival and minutes away
+
 	// creates local "temporary" object for holding train data
 	var newTrain = {
 		name: trnName,
 		destination: trnDestination,
 		first: trnFirst,
-		frequency: trnFrequency
+		frequency: trnFrequency,
+		arrival: tMinutesTillTrain,
+		away: nextTrain
 	};
 
 	// uploads employee data to the database
@@ -38,6 +65,8 @@ $("#add-train-btn").on("click", function() {
 	console.log(newTrain.destination);
 	console.log(newTrain.first);
 	console.log(newTrain.frequency);
+	console.log(newTrain.arrival);
+	console.log(newTrain.away);
 
 	// alert modal
 	$('#alertModal').modal();
@@ -53,10 +82,6 @@ $("#add-train-btn").on("click", function() {
 });
 // end button for adding trains
 
-// moment JS implementation for next arrival and minutes away
-
-// end moment JS implementation for next arrival and minutes away
-
 // creates a firebase event for adding a train to the database and a row in the html when a user adds an entry
 database.ref().on("child_added", function(childSnapshot, prevChildKey) {
 
@@ -66,14 +91,18 @@ database.ref().on("child_added", function(childSnapshot, prevChildKey) {
 	var trnName = childSnapshot.val().name;
 	var trnDestination = childSnapshot.val().destination;
 	var trnFrequency = childSnapshot.val().frequency;
+	var nextTrain = childSnapshot.val().arrival;
+	var tMinutesTillTrain = childSnapshop.val().away;
 
 	// train info
 	console.log(trnName);	
 	console.log(trnDestination);
 	console.log(trnFrequency);
+	console.log(nextTrain);
+	console.log(tMinutesTillTrain);
 
 	// add each train's data into the table
-	$("#train-table > tbody").append("<tr><td>" + trnName + "</td><td>" + trnDestination + "</td><td>" + trnFrequency + "</td><td>" + "Next Arrival" + "</td><td>" + "Minutes Away" + "</td></tr>");
+	$("#train-table > tbody").append("<tr><td>" + trnName + "</td><td>" + trnDestination + "</td><td>" + trnFrequency + "</td><td>" + nextTrain + "</td><td>" + tMinutesTillTrain + "</td></tr>");
 });
 // end firebase event for adding trains from user input to table
 
