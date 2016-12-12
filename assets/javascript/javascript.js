@@ -120,13 +120,13 @@ database.ref().on("child_added", function(childSnapshot, prevChildKey) {
 	var minAway = trnFrequency - tRemainder;
 	console.log(minAway);
 
-	// displays the time of the next train
-	trnNext = moment(trnNext).format("hh:mm A");
-	console.log("next train: " + trnNext);
-
 	// displays the minutes away until the next train
 	trnMinAway = moment().add(minAway, "minutes");
-	console.log("minutes away: " + trnMinAway);
+	console.log("minutes away: " + minAway);
+
+	// // displays the time of the next train
+	trnNext = moment(trnMinAway).format("hh:mm A");
+	console.log("next train: " + trnNext);
 	// end moment JS implementation
 
 	// add each train's data into the table
